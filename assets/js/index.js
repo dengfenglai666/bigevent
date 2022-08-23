@@ -18,20 +18,26 @@ function getUserInfo() {
 //渲染用户头像
 function renderAvatar(user) {
     const name = user.nickname || user.username
-    document.querySelector('.welcome').innerHTML = `欢迎\u00A0\u00A0\u00A0${name}`
+    document.querySelector('.welcome').innerHTML = `欢迎\u00A0\u00A0\u00A0 ${name}`
+    const imgAvatar = document.querySelectorAll('.layui-nav-img')
+    const textAvatar = document.querySelectorAll('.text-avatar')
     //根据后台头像的有无来决定用图片头像还是文字头像
     //图片头像
     if (user.user_pic) {
-        document.querySelector('.layui-nav-img').src = `${user.user_pic}`
-        document.querySelector('.text-avatar').style.display = 'none'
-    }
-    //文字头像
-    document.querySelector('.layui-nav-img').style.display = 'none'
-    document.querySelector(' .userinfo .layui-nav-img').style.display = 'none'
+        imgAvatar[0].src = `${user.user_pic}`
+        imgAvatar[1].src = `${user.user_pic}`
+        $('.layui-nav-img').show()
+        textAvatar[0].style.display = 'none'
+        textAvatar[1].style.display = 'none'
+    } else {
+        //文字头像
+        imgAvatar[0].style.display = 'none'
+        imgAvatar[1].style.display = 'none'
 
-    //渲染文字
-    document.querySelectorAll('.text-avatar')[0].innerHTML = name[0].toUpperCase()
-    document.querySelectorAll('.text-avatar')[1].innerHTML = name[0].toUpperCase()
+        //渲染文字
+        textAvatar[0].innerHTML = name[0].toUpperCase()
+        textAvatar[1].innerHTML = name[0].toUpperCase()
+    }
 }
 
 //退出操作模块
